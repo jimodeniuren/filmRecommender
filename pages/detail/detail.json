@@ -7,6 +7,7 @@
     "custom-ad": "/components/custom-ad/custom-ad",
     "uni-ad": "/components/uni-ad/uni-ad",
     "vod-item": "/components/vod-item/vod-item",
-    "message": "/components/message/message"
+    "message": "/components/message/message",
+    "WxComment": "/component/WxComment/WxComment"
   }
 }

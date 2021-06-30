@@ -9,6 +9,7 @@ var Common = require('../../libs/scripts/common.js');
 AV.init({
   appId: 'ESteiPXPxvUhiI2EH7ptl2pj-gzGzoHsz',
   appKey: 'XuGrgqCkG7FUiq9PGfIqg623',
+  // isFinished:false,
 });
 
 Component({
@@ -72,7 +73,7 @@ Component({
         count_query.equalTo('article_id', that.data.articleID);
         count_query.find().then(function (results) {
           // 阅读量统计对象一文章对应一对象
-          if (results.length == 1) {
+          if (results.length >= 1) {
             var count_todo = AV.Object.createWithoutData('Count', results[0].id);
             count_todo.save().then(function (count_todo) {
               count_todo.increment('views', 1);
@@ -243,6 +244,8 @@ Component({
                     } // end for subcoments
                   } // end if
                   if (x == promiseFuncArr.length) {
+                    if(that.data.isFinished){return null;}
+                    that.data.isFinished = true;
                     //console.log('finished')
                     console.log(that.data.all_comment_num);
                     // 显示所有评论
@@ -297,7 +300,8 @@ Component({
     article_views: 0,
     is_admin: false,
     comment_nickname_len: 12,
-    subcomment_nickname_len: 10
+    subcomment_nickname_len: 10,
+    isFinished:false
   },
   methods: {
     // 事件响应函数
